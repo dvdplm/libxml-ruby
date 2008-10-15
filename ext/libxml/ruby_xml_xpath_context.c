@@ -4,7 +4,7 @@
 
 #include "ruby_libxml.h"
 #include "ruby_xml_xpath_context.h"
-#include <st.h>
+#include <ruby/st.h>
 
 
 /*
@@ -204,12 +204,12 @@ ruby_xml_xpath_context_register_namespaces(VALUE self, VALUE nslist) {
     ruby_xml_xpath_context_register_namespace(self, rprefix, ruri);
     break;
   case T_ARRAY:
-    for (i = 0; i < RARRAY(nslist)->len; i++) {
-      ruby_xml_xpath_context_register_namespaces(self, RARRAY(nslist)->ptr[i]);
+    for (i = 0; i < RARRAY_LEN(nslist); i++) {
+      ruby_xml_xpath_context_register_namespaces(self, RARRAY_PTR(nslist)[i]);
     }
     break;
   case T_HASH:
-    st_foreach(RHASH(nslist)->tbl, iterate_ns_hash, self);
+    st_foreach(RHASH_TBL(nslist), iterate_ns_hash, self);
     break;
   default:
     rb_raise(rb_eArgError, "Invalid argument type, only accept string, array of strings, or an array of arrays");

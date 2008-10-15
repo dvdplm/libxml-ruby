@@ -6,8 +6,8 @@
 #include "version.h"
 
 #include <ruby.h>
-#include <rubyio.h>
-#include <util.h>
+#include <ruby/io.h>
+#include <ruby/util.h>
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
 #include <libxml/debugXML.h>
